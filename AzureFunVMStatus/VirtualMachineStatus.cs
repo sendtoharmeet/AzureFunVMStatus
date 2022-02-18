@@ -12,6 +12,11 @@ using Newtonsoft.Json;
 
 namespace AzureFunVMStatus
 {
+    /*
+     https://docs.lacework.com/gather-the-required-azure-client-id-tenant-id-and-client-secret
+     https://docs.microsoft.com/en-us/azure/storage/common/storage-account-keys-manage?tabs=azure-portal
+    */
+    
     public static class VirtualMachineStatus
     {
         static AzureCredentials MySecrate()
@@ -24,15 +29,14 @@ namespace AzureFunVMStatus
         }
 
         [FunctionName("VirtualMachineStatus")]
-        public async static void Run([TimerTrigger("0 0 * * * *")] TimerInfo myTimer, ILogger log, ExecutionContext context)
+        public async static void Run([TimerTrigger("0 0 * * * *", RunOnStartup = true)] TimerInfo myTimer, ILogger log, ExecutionContext context)
         {
             var azure = Microsoft.Azure.Management.Fluent.Azure
                         .Configure()
                         .WithLogLevel(HttpLoggingDelegatingHandler.Level.Basic)
-                        .Authenticate(MySecrate())
-                        .WithDefaultSubscription();
+                        .Authenticate(MySecrate()).WithSubscription("<<SUBSCRIPTION ID>>");
 
-            var resourcegroup = "your-resourcegroup-name-here";
+            var resourcegroup = "";
             CreateQueueIfNotExists(log, context);
 
             foreach (var virtualMachine in await azure.VirtualMachines.ListByResourceGroupAsync(resourcegroup))
