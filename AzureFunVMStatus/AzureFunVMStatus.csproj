@@ -1,12 +1,11 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <AzureFunctionsVersion>v3</AzureFunctionsVersion>
+    <UserSecretsId>664c7256-7cfc-4799-96a4-fe398d2420fb</UserSecretsId>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Remove="VirtualMachineStatus.cs" />
-  </ItemGroup>
-  <ItemGroup>
+    <PackageReference Include="Microsoft.ApplicationInsights.WorkerService" Version="2.15.0" />
     <PackageReference Include="Microsoft.Azure.Management.Compute.Fluent" Version="1.38.0" />
     <PackageReference Include="Microsoft.Azure.Management.Fluent" Version="1.38.0" />
     <PackageReference Include="Microsoft.Azure.WebJobs" Version="3.0.31" />

@@ -338,3 +338,6 @@ ASALocalRun/
 
 # BeatPulse healthcheck temp database
 healthchecksdb
+/AzureFunVMStatus/Properties/ServiceDependencies
+/AzureFunVMStatus/Properties/serviceDependencies.harmeetfuncapp - Zip Deploy.json
+/AzureFunVMStatus/Properties/serviceDependencies.readvm - Zip Deploy.json

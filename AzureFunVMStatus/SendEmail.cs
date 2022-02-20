@@ -27,17 +27,22 @@ namespace AzureFunVMStatus
         {
             try
             {
+                var fromEmailAddress = "";
+                var fromEmailPassword = "";
+                var toEmailAddress = "";
+                var host = "smtp.gmail.com";  // This is gmail host
+                var port = 587; //Email sending port. Gmail is using 587 PORT
                 using (MailMessage mail = new MailMessage())
                 {
-                    mail.From = new MailAddress("@gmail.com");
-                    mail.To.Add("@yahoo.com");
-                    mail.Subject = "<<Meeagse>> VM Is Running";
+                    mail.From = new MailAddress(fromEmailAddress);
+                    mail.To.Add(toEmailAddress);
+                    mail.Subject = "Azure VM Is Running";
                     mail.Body = htmlString;
                     mail.IsBodyHtml = true;
                     
-                    using (SmtpClient smtp = new SmtpClient("smtp.gmail.com", 587))
+                    using (SmtpClient smtp = new SmtpClient(host, port))
                     {
-                        smtp.Credentials = new NetworkCredential("", "");
+                        smtp.Credentials = new NetworkCredential(fromEmailAddress, fromEmailPassword);
                         smtp.EnableSsl = true;
                         smtp.UseDefaultCredentials = false;
                         smtp.Send(mail);
